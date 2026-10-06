@@ -1049,7 +1049,7 @@ function formatRemain(sec){
 const TOTAL_STUDY_MINUTES =
 
   S.reduce(
-    (sum,[start,end,name]) => {
+    (sum,[name,start,end]) => {
 
       if(
         name === "휴식" ||
@@ -1150,9 +1150,9 @@ function renderSchedule(current){
   S.forEach((item,i) => {
 
     const [
+      name,
       start,
-      end,
-      name
+      end
     ] = item;
 
 
@@ -1198,22 +1198,21 @@ function renderSchedule(current){
     const duration =
       en - st;
 
+row.innerHTML = `
 
-    row.innerHTML = `
+  <div class="name">
+    ${name}
+  </div>
 
-      <div class="time">
-        ${start} - ${end}
-      </div>
+  <div class="time">
+    ${start} - ${end}
+  </div>
 
-      <div class="name">
-        ${name}
-      </div>
+  <div class="dur">
+    (${duration}')
+  </div>
 
-      <div class="dur">
-        (${duration}')
-      </div>
-
-    `;
+`;
 
 
     list.appendChild(row);
@@ -1359,11 +1358,11 @@ function update(){
   ){
 
     const st =
-      mins(S[i][0]);
+      mins(S[i][1]);
 
 
     const en =
-      mins(S[i][1]);
+      mins(S[i][2]);
 
 
     if(
@@ -1387,9 +1386,9 @@ function update(){
   if(currentIndex >= 0){
 
     const [
+      name,
       start,
-      end,
-      name
+      end
     ] = S[currentIndex];
 
 
