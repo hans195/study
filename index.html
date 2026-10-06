@@ -205,10 +205,11 @@ circle{
     padding:14px 24px;
     display:grid;
     grid-template-columns:43% 57%;
+    grid-template-rows:auto 1fr auto;
     column-gap:24px
   }
 
-  /* 왼쪽 전체 영역 */
+  /* 왼쪽 상단 날짜/시계 */
 
   .top{
     grid-column:1;
@@ -216,12 +217,21 @@ circle{
     align-self:start
   }
 
+  /* 왼쪽 카운트다운 영역 */
+  /* 세로 가운데에 배치 */
+
   .ringWrap{
     grid-column:1;
-    grid-row:2;
+    grid-row:1 / span 3;
+
     margin:0;
+
     align-self:center;
-    justify-self:center
+    justify-self:center;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center
   }
 
   .ring{
@@ -237,17 +247,21 @@ circle{
 
   .total{
     grid-column:1;
-    grid-row:3;
+    grid-row:1 / span 3;
+
+    align-self:center;
     justify-self:center;
-    align-self:start;
 
     width:auto;
     min-width:190px;
 
     padding:7px 12px;
-    margin:-4px 0 0;
+    margin-top:300px;
 
-    border-radius:12px
+    border-radius:12px;
+
+    position:relative;
+    z-index:2
   }
 
   .total small{
@@ -263,6 +277,7 @@ circle{
   .list{
     grid-column:2;
     grid-row:1 / span 2;
+
     align-self:center;
 
     gap:5px
@@ -342,7 +357,7 @@ circle{
   .total{
     min-width:160px;
     padding:5px 9px;
-    margin-top:-2px
+    margin-top:235px
   }
 
   .total small{
@@ -393,7 +408,6 @@ circle{
     <div class="clock" id="clock"></div>
   </div>
 
-
   <div class="ringWrap">
 
     <div class="ring">
@@ -437,7 +451,6 @@ circle{
 
   </div>
 
-
   <div class="total">
 
     <small>총 공부시간</small>
@@ -448,9 +461,7 @@ circle{
 
   </div>
 
-
   <div class="list" id="list"></div>
-
 
   <div class="footer">
     화면을 켜둔 채 공부하세요 · 오전 시작용
@@ -483,11 +494,9 @@ const S=[
 
 ];
 
-
 const $=id=>document.getElementById(id);
 
 const pad=n=>String(n).padStart(2,"0");
-
 
 const mins=t=>{
 
@@ -496,7 +505,6 @@ const mins=t=>{
   return a*60+b;
 
 };
-
 
 function render(){
 
@@ -509,7 +517,6 @@ function render(){
   const sec=now.getSeconds();
 
   const cur=h*60+m+sec/60;
-
 
   $("date").textContent=
 
@@ -525,11 +532,9 @@ function render(){
 
     });
 
-
   $("clock").textContent=
 
     `${pad(h)}:${pad(m)}:${pad(sec)}`;
-
 
   let idx=S.findIndex(
 
@@ -537,51 +542,31 @@ function render(){
 
   );
 
-
   const list=$("list");
 
   list.innerHTML="";
-
 
   S.forEach((x,i)=>{
 
     let d=document.createElement("div");
 
-    d.className=
-
-      "row"+(i===idx?" active":"");
-
+    d.className="row"+(i===idx?" active":"");
 
     d.innerHTML=`
 
-      <div class="time">
+      <div class="time">${x[0]}–${x[1]}</div>
 
-        ${x[0]}–${x[1]}
+      <div class="name">${x[2]}</div>
 
-      </div>
-
-      <div class="name">
-
-        ${x[2]}
-
-      </div>
-
-      <div class="dur">
-
-        ${mins(x[1])-mins(x[0])}분
-
-      </div>
+      <div class="dur">${mins(x[1])-mins(x[0])}분</div>
 
     `;
-
 
     list.appendChild(d);
 
   });
 
-
   let studiedMinutes=0;
-
 
   S.forEach(x=>{
 
@@ -589,14 +574,7 @@ function render(){
 
     const end=mins(x[1]);
 
-
-    if(
-
-      x[2]!=="점심" &&
-
-      x[2]!=="저녁"
-
-    ){
+    if(x[2]!=="점심" && x[2]!=="저녁"){
 
       if(cur>=end){
 
@@ -614,36 +592,23 @@ function render(){
 
   });
 
+  const studiedHours=Math.floor(studiedMinutes/60);
 
-  const studiedHours=
-
-    Math.floor(studiedMinutes/60);
-
-
-  const studiedMins=
-
-    Math.floor(studiedMinutes%60);
-
+  const studiedMins=Math.floor(studiedMinutes%60);
 
   const studiedText=
 
     `${studiedHours}시간 ${pad(studiedMins)}분`;
 
-
   $("totalStudy").textContent=
 
     `${studiedText} / 10시간 30분`;
-
 
   if(idx>=0){
 
     const x=S[idx];
 
-
-    const total=
-
-      (mins(x[1])-mins(x[0]))*60;
-
+    const total=(mins(x[1])-mins(x[0]))*60;
 
     const left=Math.max(
 
@@ -653,11 +618,7 @@ function render(){
 
     );
 
-
-    $("period").textContent=
-
-      x[2];
-
+    $("period").textContent=x[2];
 
     $("remain").textContent=
 
@@ -667,50 +628,33 @@ function render(){
 
       `${pad(left%60)}`;
 
-
     $("label").textContent=
 
       `${x[0]}–${x[1]}`;
 
+    let p=Math.min(
 
-    let p=
+      1,
 
-      Math.min(
+      Math.max(0,left/total)
 
-        1,
+    );
 
-        Math.max(0,left/total)
-
-      );
-
-
-    let c=
-
-      2*Math.PI*136;
-
+    let c=2*Math.PI*136;
 
     $("prog").style.strokeDasharray=c;
 
-
-    $("prog").style.strokeDashoffset=
-
-      c*(1-p);
+    $("prog").style.strokeDashoffset=c*(1-p);
 
   }
 
   else{
 
-    $("remain").textContent=
-
-      "00:00:00";
-
+    $("remain").textContent="00:00:00";
 
     if(cur<mins(S[0][0])){
 
-      $("period").textContent=
-
-        "시작 전";
-
+      $("period").textContent="시작 전";
 
       $("label").textContent=
 
@@ -720,29 +664,21 @@ function render(){
 
     else{
 
-      $("period").textContent=
+      $("period").textContent="오늘 끝";
 
-        "오늘 끝";
-
-
-      $("label").textContent=
-
-        "수고했어요";
+      $("label").textContent="수고했어요";
 
     }
-
 
     $("prog").style.strokeDasharray=
 
       2*Math.PI*136;
-
 
     $("prog").style.strokeDashoffset=0;
 
   }
 
 }
-
 
 render();
 
