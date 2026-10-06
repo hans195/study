@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport"
@@ -175,6 +176,15 @@ body{
   flex:none;
 }
 
+.tableTitle{
+  color:#697386;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  margin-bottom:6px;
+  text-align:center;
+}
+
 .list{
   display:grid;
   gap:0;
@@ -320,6 +330,14 @@ body{
     margin-left:auto;
   }
 
+  .tableTitle{
+    font-size:12px;
+    letter-spacing:1.5px;
+    margin-bottom:5px;
+    text-align:center;
+    transform:translateX(-30px);
+  }
+
   .list{
     display:grid;
     gap:0;
@@ -417,6 +435,14 @@ body{
   .right{
     align-self:center;
     max-width:220px;
+  }
+
+  .tableTitle{
+    font-size:10px;
+    letter-spacing:1.3px;
+    margin-bottom:4px;
+    text-align:center;
+    transform:translateX(-30px);
   }
 
   .list{
@@ -518,6 +544,10 @@ body{
   </div>
 
   <div class="right">
+
+    <div class="tableTitle">
+      TIME TABLE
+    </div>
 
     <div class="list" id="list"></div>
 
@@ -954,4 +984,3 @@ setInterval(
 
 </body>
 </html>
-
