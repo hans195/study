@@ -209,16 +209,13 @@ circle{
     column-gap:24px
   }
 
-  /* 왼쪽 상단 날짜/시계 */
-
   .top{
     grid-column:1;
     grid-row:1;
     align-self:start
   }
 
-  /* 왼쪽 카운트다운 영역 */
-  /* 세로 가운데에 배치 */
+  /* 왼쪽 카운트다운 */
 
   .ringWrap{
     grid-column:1;
@@ -228,6 +225,8 @@ circle{
 
     align-self:center;
     justify-self:center;
+
+    transform:translateY(-45px);
 
     display:flex;
     flex-direction:column;
@@ -243,7 +242,7 @@ circle{
     font-size:40px
   }
 
-  /* 총 공부시간을 원 바로 아래 */
+  /* 총 공부시간 */
 
   .total{
     grid-column:1;
@@ -256,7 +255,8 @@ circle{
     min-width:190px;
 
     padding:7px 12px;
-    margin-top:300px;
+
+    margin-top:255px;
 
     border-radius:12px;
 
@@ -336,6 +336,10 @@ circle{
     font-size:8px
   }
 
+  .ringWrap{
+    transform:translateY(-30px)
+  }
+
   .ring{
     width:min(38vh,215px);
     height:min(38vh,215px)
@@ -357,7 +361,7 @@ circle{
   .total{
     min-width:160px;
     padding:5px 9px;
-    margin-top:235px
+    margin-top:205px
   }
 
   .total small{
