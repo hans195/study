@@ -41,7 +41,7 @@ body{
 }
 
 .date{
-  font-size:20px;
+  font-size:18px;
   color:#9aa4b2;
   margin-bottom:3px;
 }
@@ -160,7 +160,7 @@ body{
 
 .row{
   display:grid;
-  grid-template-columns:92px 1fr auto;
+  grid-template-columns:70px 1fr auto;
   align-items:center;
   min-height:45px;
   padding:9px 12px;
@@ -213,9 +213,9 @@ body{
     max-height:650px;
     padding:14px 24px;
     display:grid;
-    grid-template-columns:43% 57%;
+    grid-template-columns:50% 50%;
     grid-template-rows:auto 1fr;
-    column-gap:24px;
+    column-gap:18px;
   }
 
   .top{
@@ -230,19 +230,19 @@ body{
     margin:0;
     align-self:center;
     justify-self:center;
-    transform:translateY(-33px);
+    transform:translateY(-30px);
     display:flex;
     flex-direction:column;
     align-items:center;
   }
 
   .ring{
-    width:min(46vh,290px);
-    height:min(46vh,290px);
+    width:min(52vh,330px);
+    height:min(52vh,330px);
   }
 
   .remain{
-    font-size:44px;
+    font-size:46px;
   }
 
   .total{
@@ -253,7 +253,7 @@ body{
     width:auto;
     min-width:205px;
     padding:8px 13px;
-    margin-top:270px;
+    margin-top:300px;
     border-radius:12px;
     position:relative;
     z-index:2;
@@ -283,6 +283,7 @@ body{
   }
 
   .row{
+    grid-template-columns:70px 1fr auto;
     min-height:41px;
     padding:8px 12px;
     border-radius:12px;
@@ -313,12 +314,12 @@ body{
 @media (orientation:landscape) and (max-height:430px){
   .app{
     padding:8px 16px;
-    grid-template-columns:43% 57%;
-    column-gap:16px;
+    grid-template-columns:50% 50%;
+    column-gap:12px;
   }
 
   .date{
-    font-size:10px;
+    font-size:18px;
   }
 
   .clock{
@@ -332,12 +333,12 @@ body{
   }
 
   .ringWrap{
-    transform:translateY(-30px);
+    transform:translateY(-25px);
   }
 
   .ring{
-    width:min(40vh,225px);
-    height:min(40vh,225px);
+    width:min(44vh,245px);
+    height:min(44vh,245px);
   }
 
   .period{
@@ -356,7 +357,7 @@ body{
   .total{
     min-width:170px;
     padding:6px 10px;
-    margin-top:215px;
+    margin-top:225px;
   }
 
   .total small{
@@ -372,6 +373,7 @@ body{
   }
 
   .row{
+    grid-template-columns:70px 1fr auto;
     min-height:31px;
     padding:5px 9px;
   }
@@ -522,13 +524,11 @@ function render(){
     }
 
     const duration = en - st;
-    const dh = Math.floor(duration / 60);
-    const dm = duration % 60;
 
     row.innerHTML = `
       <div class="time">${start} - ${end}</div>
       <div class="name">${name}</div>
-      <div class="dur">${dh > 0 ? dh + "시간" : ""}${dm > 0 ? " " + dm + "분" : ""}</div>
+      <div class="dur">${duration}분</div>
     `;
 
     list.appendChild(row);
