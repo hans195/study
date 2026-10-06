@@ -1,32 +1,62 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               viewport-fit=cover">
+
+<!-- iPhone 홈 화면 앱 모드 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Morning">
+
+<!-- 일반 브라우저/일부 환경 -->
 <meta name="mobile-web-app-capable" content="yes">
 
 <title>Morning</title>
 
+
 <style>
+
 *{
   box-sizing:border-box;
 }
 
-html,body{
+
+html,
+body{
+
   margin:0;
+
   width:100%;
   height:100%;
-  background:#080a0f;
-  color:#f5f7fa;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
   overflow:hidden;
+
+  background:#090d14;
+
+  color:#fff;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    sans-serif;
 }
 
+
 body{
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
   padding:
     env(safe-area-inset-top)
     env(safe-area-inset-right)
@@ -34,593 +64,1235 @@ body{
     env(safe-area-inset-left);
 }
 
+
+/* =========================
+   기본 세로 화면
+========================= */
+
 .app{
+
   width:100%;
   height:100%;
+
+  max-width:600px;
+
+  padding:18px;
+
   display:flex;
+
   flex-direction:column;
 }
+
 
 .top{
-  height:76px;
-  padding:14px 18px 8px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
+
+  text-align:center;
+
+  flex:none;
 }
+
 
 .date{
-  font-size:13px;
-  color:#8b95a5;
+
+  font-size:18px;
+
+  color:#9aa4b2;
+
+  margin-bottom:3px;
 }
+
 
 .clock{
-  margin-top:3px;
-  font-size:23px;
+
+  font-size:28px;
+
   font-weight:700;
-  letter-spacing:-.5px;
+
+  letter-spacing:-1px;
 }
+
 
 .badge{
-  margin-top:3px;
+
+  display:inline-block;
+
+  margin-top:6px;
+
   padding:5px 9px;
+
   border-radius:999px;
+
   background:#2a2614;
+
   color:#facc15;
-  font-size:11px;
-  font-weight:700;
-}
 
-.main{
-  flex:1;
-  display:flex;
-  min-height:0;
-}
+  font-size:10px;
 
-.left{
-  width:65%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  position:relative;
-  padding-top:8px;
-}
-
-.ring{
-  width:min(62vh,390px);
-  height:min(62vh,390px);
-  position:relative;
-  margin-top:24px;
-}
-
-.ring svg{
-  width:100%;
-  height:100%;
-  transform:rotate(-90deg);
-}
-
-.ring-bg{
-  fill:none;
-  stroke:#20242c;
-  stroke-width:10;
-}
-
-.ring-progress{
-  fill:none;
-  stroke:#facc15;
-  stroke-width:10;
-  stroke-linecap:round;
-  transition:stroke-dashoffset .5s linear;
-}
-
-.center{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.remain{
-  font-size:56px;
-  font-weight:800;
-  letter-spacing:-2px;
-}
-
-.period{
-  margin-top:4px;
-  margin-bottom:6px;
-  font-size:16px;
-  font-weight:700;
-  color:#fde047;
-}
-
-.label{
-  font-size:12px;
-  color:#8b95a5;
-}
-
-.total{
-  margin-top:325px;
-  padding:9px 14px;
-  border:1px solid #20242c;
-  border-radius:10px;
-  color:#aab2bf;
-  font-size:12px;
-  background:#0d1016;
-}
-
-.right{
-  width:35%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-start;
-  padding:0 24px 0 0;
-}
-
-.list{
-  width:100%;
-  max-width:260px;
-  display:flex;
-  flex-direction:column;
-  gap:0;
-  transform:translateX(-22px);
-}
-
-.row{
-  display:grid;
-  grid-template-columns:82px 1fr auto;
-  column-gap:4px;
-  align-items:center;
-  min-height:32px;
-  padding:4px 5px 4px 8px;
-  border-radius:8px;
-  border:1px solid transparent;
-}
-
-.row.active{
-  background:#2a2614;
-  border-color:#facc15;
-  box-shadow:0 0 12px rgba(250,204,21,.18);
-}
-
-.time{
-  font-size:12px;
-  color:#8b95a5;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.name{
-  font-size:12px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.duration{
-  font-size:11px;
-  color:#8b95a5;
-  white-space:nowrap;
-}
-
-.footer{
-  margin-top:16px;
-  margin-left:0;
-  padding-left:4px;
-  color:#8b95a5;
-  font-size:12px;
   font-weight:600;
 }
 
-/* 낮은 높이의 가로 화면 */
-@media (orientation:landscape) and (max-height:600px){
+
+/* =========================
+   원형 시계
+========================= */
+
+.ringWrap{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  flex:1;
+
+  margin:8px 0;
+}
+
+
+.ring{
+
+  width:min(58vw,280px);
+
+  height:min(58vw,280px);
+
+  position:relative;
+}
+
+
+.ring svg{
+
+  width:100%;
+  height:100%;
+
+  transform:rotate(-90deg);
+}
+
+
+.ring-bg{
+
+  fill:none;
+
+  stroke:#202938;
+
+  stroke-width:10;
+}
+
+
+.ring-progress{
+
+  fill:none;
+
+  stroke:#facc15;
+
+  stroke-width:10;
+
+  stroke-linecap:round;
+
+  transition:
+    stroke-dashoffset .5s linear;
+}
+
+
+.center{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+}
+
+
+.period{
+
+  font-size:15px;
+
+  color:#9aa4b2;
+
+  margin-bottom:5px;
+}
+
+
+.remain{
+
+  font-size:46px;
+
+  font-weight:800;
+
+  letter-spacing:-2px;
+}
+
+
+.label{
+
+  margin-top:3px;
+
+  font-size:11px;
+
+  color:#8b95a5;
+}
+
+
+/* =========================
+   총 공부시간
+========================= */
+
+.total{
+
+  flex:none;
+
+  width:fit-content;
+
+  min-width:190px;
+
+  margin:
+
+    -2px
+    auto
+    10px;
+
+  padding:8px 13px;
+
+  border:1px solid #202938;
+
+  border-radius:12px;
+
+  background:#111722;
+
+  text-align:center;
+}
+
+
+.total small{
+
+  display:block;
+
+  color:#8b95a5;
+
+  font-size:9px;
+
+  margin-bottom:2px;
+}
+
+
+.total strong{
+
+  font-size:12px;
+}
+
+
+/* =========================
+   오른쪽 시간표
+========================= */
+
+.right{
+
+  flex:none;
+}
+
+
+.list{
+
+  display:grid;
+
+  gap:0;
+}
+
+
+.row{
+
+  display:grid;
+
+  grid-template-columns:
+    70px 1fr auto;
+
+  column-gap:8px;
+
+  align-items:center;
+
+  min-height:45px;
+
+  padding:9px 12px;
+
+  border:1px solid #1d2635;
+
+  border-radius:12px;
+
+  background:#111722;
+
+  transition:.2s;
+}
+
+
+.row.active{
+
+  background:#2a2614;
+
+  border-color:#facc15;
+
+  box-shadow:
+    0 0 0 1px
+    rgba(250,204,21,.18);
+}
+
+
+.time{
+
+  font-size:12px;
+
+  color:#8b95a5;
+
+  font-weight:700;
+
+  white-space:nowrap;
+}
+
+
+.name{
+
+  font-size:14px;
+
+  font-weight:700;
+}
+
+
+.dur{
+
+  font-size:12px;
+
+  color:#8b95a5;
+
+  text-align:right;
+
+  white-space:nowrap;
+}
+
+
+.row.active .name{
+
+  color:#fde047;
+}
+
+
+.footer{
+
+  margin-top:9px;
+
+  text-align:center;
+
+  color:#667181;
+
+  font-size:9px;
+
+  line-height:1;
+}
+
+
+/* ==================================================
+   가로 화면
+================================================== */
+
+@media (orientation:landscape){
+
+  .app{
+
+    max-width:1100px;
+
+    width:100%;
+    height:100vh;
+
+    max-height:650px;
+
+    padding:
+      calc(14px + env(safe-area-inset-top))
+      calc(24px + env(safe-area-inset-right))
+      calc(14px + env(safe-area-inset-bottom))
+      calc(24px + env(safe-area-inset-left));
+
+    display:grid;
+
+    grid-template-columns:
+      65% 35%;
+
+    grid-template-rows:
+      auto 1fr;
+
+    column-gap:10px;
+  }
+
 
   .top{
-    height:60px;
-    padding:10px 16px 6px;
+
+    grid-column:1;
+
+    grid-row:1;
+
+    align-self:start;
   }
 
-  .clock{
-    font-size:20px;
+
+  .ringWrap{
+
+    grid-column:1;
+
+    grid-row:1 / span 2;
+
+    margin:0;
+
+    align-self:center;
+
+    justify-self:center;
+
+    /*
+      원형 시계를 기존보다
+      아주 조금 아래로
+    */
+
+    transform:
+      translateY(-18px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
   }
 
-  .main{
-    padding:
-      0
-      env(safe-area-inset-right)
-      0
-      env(safe-area-inset-left);
-  }
 
-  .left{
-    width:65%;
-    padding-top:0;
-  }
+  /*
+    왼쪽 원형 시계 확대
+  */
 
   .ring{
-    width:min(53vh,290px);
-    height:min(53vh,290px);
-    margin-top:30px;
+
+    width:min(62vh,390px);
+
+    height:min(62vh,390px);
   }
+
 
   .remain{
-    font-size:40px;
+
+    font-size:56px;
   }
+
 
   .period{
-    font-size:14px;
-    margin-bottom:4px;
+
+    font-size:16px;
+
+    margin-bottom:6px;
   }
+
 
   .label{
-    font-size:10px;
+
+    font-size:12px;
   }
+
+
+  /*
+    총 공부시간을 위로 이동
+  */
 
   .total{
-    margin-top:250px;
-    padding:7px 11px;
+
+    grid-column:1;
+
+    grid-row:1 / span 2;
+
+    align-self:center;
+
+    justify-self:center;
+
+    width:auto;
+
+    min-width:215px;
+
+    padding:8px 13px;
+
+    margin-top:325px;
+
+    border-radius:12px;
+
+    position:relative;
+
+    z-index:2;
+  }
+
+
+  .total small{
+
     font-size:10px;
   }
 
-  .right{
-    width:35%;
-    padding-right:18px;
+
+  .total strong{
+
+    font-size:12px;
   }
+
+
+  /* 오른쪽 */
+
+  .right{
+
+    grid-column:2;
+
+    grid-row:1 / span 2;
+
+    align-self:center;
+
+    width:100%;
+
+    max-width:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    transform:none;
+
+    padding:0;
+
+    margin-left:auto;
+  }
+
 
   .list{
-    max-width:220px;
-    transform:translateX(-18px);
+
+    display:grid;
+
+    gap:0;
+
+    /*
+      타임테이블 전체를
+      아주 조금 왼쪽으로
+    */
+
+    transform:
+      translateX(-8px);
   }
 
+
   .row{
-    grid-template-columns:76px 1fr auto;
-    column-gap:3px;
-    min-height:28px;
-    padding:3px 4px 3px 7px;
+
+    grid-template-columns:
+      82px 1fr auto;
+
+    column-gap:4px;
+
+    min-height:32px;
+
+    padding:
+      4px
+      5px
+      4px
+      8px;
+
     border-radius:8px;
   }
 
+
   .time{
-    font-size:11px;
+
+    font-size:10px;
+
+    font-weight:700;
   }
+
 
   .name{
-    font-size:11px;
+
+    font-size:12px;
   }
 
-  .duration{
+
+  .dur{
+
+    font-size:10px;
+
+    text-align:right;
+  }
+
+
+  .footer{
+
+    /*
+      8교시와 간격을 조금 더
+    */
+
+    margin-top:10px;
+
+    text-align:center;
+
+    font-size:8px;
+
+    line-height:1;
+
+    transform:
+      translateX(-8px);
+  }
+
+}
+
+
+/* ==================================================
+   낮은 높이의 가로 화면
+================================================== */
+
+@media (orientation:landscape)
+       and (max-height:430px){
+
+  .app{
+
+    padding:
+      calc(8px + env(safe-area-inset-top))
+      calc(16px + env(safe-area-inset-right))
+      calc(8px + env(safe-area-inset-bottom))
+      calc(16px + env(safe-area-inset-left));
+
+    grid-template-columns:
+      65% 35%;
+
+    column-gap:8px;
+  }
+
+
+  .date{
+
+    font-size:18px;
+  }
+
+
+  .clock{
+
+    font-size:21px;
+  }
+
+
+  .badge{
+
+    margin-top:3px;
+
+    padding:3px 6px;
+
+    font-size:8px;
+  }
+
+
+  .ringWrap{
+
+    /*
+      낮은 화면에서도
+      원형을 아주 조금 아래로
+    */
+
+    transform:
+      translateY(-18px);
+  }
+
+
+  /*
+    낮은 화면에서도
+    기존보다 조금 크게
+  */
+
+  .ring{
+
+    width:min(53vh,290px);
+
+    height:min(53vh,290px);
+  }
+
+
+  .period{
+
+    font-size:12px;
+
+    margin-bottom:3px;
+  }
+
+
+  .remain{
+
+    font-size:40px;
+  }
+
+
+  .label{
+
+    font-size:9px;
+  }
+
+
+  /*
+    총 공부시간도 위로
+  */
+
+  .total{
+
+    min-width:175px;
+
+    padding:6px 10px;
+
+    margin-top:250px;
+  }
+
+
+  .total small{
+
+    font-size:8px;
+  }
+
+
+  .total strong{
+
     font-size:10px;
   }
 
-  .footer{
-    margin-top:22px;
-    padding-left:3px;
-    font-size:11px;
-  }
-}
-
-/* 세로 화면 */
-@media (orientation:portrait){
-
-  .top{
-    height:82px;
-  }
-
-  .main{
-    flex-direction:column;
-    align-items:center;
-    overflow:auto;
-  }
-
-  .left{
-    width:100%;
-    flex:none;
-    padding-top:4px;
-  }
-
-  .ring{
-    width:min(82vw,360px);
-    height:min(82vw,360px);
-    margin-top:8px;
-  }
-
-  .remain{
-    font-size:48px;
-  }
-
-  .total{
-    margin-top:18px;
-  }
 
   .right{
-    width:100%;
-    flex:none;
-    padding:24px 20px 30px;
-    align-items:center;
+
+    align-self:center;
+
+    max-width:220px;
   }
+
 
   .list{
-    max-width:360px;
-    transform:none;
+
+    gap:0;
+
+    /*
+      낮은 화면 타임테이블도
+      조금만 왼쪽으로
+    */
+
+    transform:
+      translateX(-6px);
   }
 
-  .footer{
-    margin-top:18px;
+
+  .row{
+
+    grid-template-columns:
+      76px 1fr auto;
+
+    column-gap:3px;
+
+    min-height:28px;
+
+    padding:
+      3px
+      4px
+      3px
+      7px;
+
+    border-radius:8px;
   }
+
+
+  .time,
+  .dur{
+
+    font-size:9px;
+  }
+
+
+  .time{
+
+    font-weight:700;
+  }
+
+
+  .name{
+
+    font-size:11px;
+  }
+
+
+  .footer{
+
+    /*
+      8교시와 살짝 간격
+    */
+
+    margin-top:7px;
+
+    font-size:7px;
+
+    transform:
+      translateX(-6px);
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
+
 <div class="app">
 
+
   <div class="top">
-    <div>
-      <div class="date" id="date">----</div>
-      <div class="clock" id="clock">--:--:--</div>
+
+    <div class="date" id="date"></div>
+
+    <div class="clock" id="clock"></div>
+
+    <div class="badge">
+      실시간 자동
     </div>
 
-    <div class="badge">실시간 자동</div>
   </div>
 
-  <div class="main">
 
-    <section class="left">
+  <div class="ringWrap">
 
-      <div class="ring">
-        <svg viewBox="0 0 200 200">
-          <circle
-            class="ring-bg"
-            cx="100"
-            cy="100"
-            r="88">
-          </circle>
 
-          <circle
-            id="progress"
-            class="ring-progress"
-            cx="100"
-            cy="100"
-            r="88">
-          </circle>
-        </svg>
+    <div class="ring">
 
-        <div class="center">
-          <div class="remain" id="remain">--:--</div>
-          <div class="period" id="period">시작 전</div>
-          <div class="label" id="label">남은 시간</div>
+
+      <svg viewBox="0 0 300 300">
+
+
+        <circle
+          class="ring-bg"
+          cx="150"
+          cy="150"
+          r="136">
+        </circle>
+
+
+        <circle
+          id="progress"
+          class="ring-progress"
+          cx="150"
+          cy="150"
+          r="136">
+        </circle>
+
+
+      </svg>
+
+
+      <div class="center">
+
+
+        <div class="period" id="period">
+          시작 전
         </div>
+
+
+        <div class="remain" id="remain">
+          00:00
+        </div>
+
+
+        <div class="label">
+          남은 시간
+        </div>
+
+
       </div>
 
-      <div class="total">
-        오늘 총 공부시간
-        <span id="total">0시간 00분 / 12시간 00분</span>
-      </div>
 
-    </section>
+    </div>
 
-    <section class="right">
-      <div class="list" id="schedule"></div>
-
-      <div class="footer">
-        돈 벌러 가자
-      </div>
-    </section>
 
   </div>
+
+
+  <div class="total">
+
+
+    <small>
+      오늘 총 공부시간
+    </small>
+
+
+    <strong id="total">
+      0시간 00분 / 12시간 00분
+    </strong>
+
+
+  </div>
+
+
+  <div class="right">
+
+
+    <div class="list" id="list"></div>
+
+
+    <div class="footer">
+      돈 벌러 가자
+    </div>
+
+
+  </div>
+
+
 </div>
 
+
 <script>
+
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* =========================
+   시간표
+========================= */
+
 const S = [
+
   ["08:30","10:00","1교시"],
+
   ["10:00","10:15","휴식"],
+
   ["10:15","11:45","2교시"],
+
   ["11:45","12:30","점심"],
+
   ["12:30","14:00","3교시"],
+
   ["14:00","14:15","휴식"],
+
   ["14:15","15:45","4교시"],
+
   ["15:45","16:00","휴식"],
+
   ["16:00","17:30","5교시"],
+
   ["17:30","18:30","저녁"],
+
   ["18:30","20:00","6교시"],
+
   ["20:00","20:15","휴식"],
+
   ["20:15","21:45","7교시"],
+
   ["21:45","22:00","휴식"],
+
   ["22:00","23:30","8교시"]
+
 ];
 
-const TOTAL_STUDY_MINUTES = 720;
 
-const $ = id => document.getElementById(id);
-
-const C = 2 * Math.PI * 88;
-
-$("progress").style.strokeDasharray = C;
-$("progress").style.strokeDashoffset = C;
-
-function mins(t){
-  const [h,m] = t.split(":").map(Number);
-  return h * 60 + m;
-}
+/* =========================
+   기본 함수
+========================= */
 
 function pad(n){
-  return String(n).padStart(2,"0");
+
+  return String(n)
+    .padStart(2,"0");
+
 }
+
+
+function mins(t){
+
+  const [h,m] =
+    t.split(":").map(Number);
+
+  return h * 60 + m;
+
+}
+
 
 function formatRemain(sec){
-  sec = Math.max(0,Math.floor(sec));
-  const h = Math.floor(sec / 3600);
-  const m = Math.floor((sec % 3600) / 60);
-  const s = sec % 60;
+
+  sec =
+    Math.max(
+      0,
+      Math.floor(sec)
+    );
+
+
+  const h =
+    Math.floor(sec / 3600);
+
+
+  const m =
+    Math.floor(
+      (sec % 3600) / 60
+    );
+
+
+  const s =
+    sec % 60;
+
 
   if(h > 0){
+
     return `${h}:${pad(m)}:${pad(s)}`;
+
   }
 
-  return `${m}:${pad(s)}`;
+
+  return `${pad(m)}:${pad(s)}`;
+
 }
 
-function renderSchedule(activeIndex){
 
-  const visible = S
-    .map((item,index)=>({item,index}))
-    .filter(({item})=>item[2] !== "휴식");
+/* =========================
+   총 공부시간
+========================= */
 
-  $("schedule").innerHTML = visible.map(({item,index})=>{
+const TOTAL_STUDY_MINUTES =
 
-    const [start,end,name] = item;
+  S.reduce(
+    (sum,[start,end,name]) => {
 
-    return `
-      <div class="row ${index === activeIndex ? "active" : ""}">
-        <div class="time">${start} - ${end}</div>
-        <div class="name">${name}</div>
-        <div class="duration">(${mins(end)-mins(start)}')</div>
-      </div>
-    `;
-  }).join("");
-}
+      if(
+        name === "휴식" ||
+        name === "점심" ||
+        name === "저녁"
+      ){
 
-function update(){
+        return sum;
 
-  const now = new Date();
+      }
 
-  const current =
-    now.getHours() * 60 +
-    now.getSeconds() / 60;
+
+      return sum +
+        mins(end) -
+        mins(start);
+
+    },
+    0
+  );
+
+
+/* =========================
+   원형 게이지
+========================= */
+
+const R = 136;
+
+const C =
+  2 * Math.PI * R;
+
+
+$("progress")
+  .style
+  .strokeDasharray = C;
+
+
+$("progress")
+  .style
+  .strokeDashoffset = C;
+
+
+/* =========================
+   날짜 / 시계
+========================= */
+
+function updateDateClock(){
+
+  const now =
+    new Date();
+
+
+  const days = [
+
+    "일",
+    "월",
+    "화",
+    "수",
+    "목",
+    "금",
+    "토"
+
+  ];
+
 
   $("date").textContent =
-    now.toLocaleDateString("ko-KR",{
-      year:"numeric",
-      month:"long",
-      day:"numeric",
-      weekday:"long"
-    });
+
+    `${now.getFullYear()}년 ` +
+    `${now.getMonth()+1}월 ` +
+    `${now.getDate()}일 ` +
+    `(${days[now.getDay()]})`;
+
 
   $("clock").textContent =
-    `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 
-  let currentIndex = -1;
+    `${pad(now.getHours())}:` +
+    `${pad(now.getMinutes())}:` +
+    `${pad(now.getSeconds())}`;
 
-  for(let i=0;i<S.length;i++){
+}
 
-    const st = mins(S[i][0]);
-    const en = mins(S[i][1]);
 
-    if(current >= st && current < en){
-      currentIndex = i;
-      break;
-    }
-  }
+/* =========================
+   오른쪽 시간표
+========================= */
 
-  /* 원형 진행률 */
-  if(currentIndex >= 0){
+function renderSchedule(current){
 
-    const [start,end,name] = S[currentIndex];
+  const list =
+    $("list");
 
-    const st = mins(start);
-    const en = mins(end);
-    const duration = en - st;
 
-    const progress =
-      Math.min(
-        1,
-        Math.max(
-          0,
-          (current - st) / duration
-        )
-      );
+  list.innerHTML = "";
 
-    $("progress").style.strokeDashoffset =
-      C * progress;
 
-    const endSeconds =
-      en * 60;
+  let activeIndex = -1;
 
-    const nowSeconds =
-      now.getHours() * 3600 +
-      now.getMinutes() * 60 +
-      now.getSeconds();
 
-    const remainSeconds =
-      Math.max(0,endSeconds-nowSeconds);
+  S.forEach((item,i) => {
 
-    $("remain").textContent =
-      formatRemain(remainSeconds);
+    const [
+      start,
+      end,
+      name
+    ] = item;
 
-    if(
-      name === "휴식" ||
-      name === "점심" ||
-      name === "저녁"
-    ){
-      $("period").textContent = "쉬는 시간";
-    }else{
-      $("period").textContent = name;
-    }
 
-    $("label").textContent = "남은 시간";
+    const st =
+      mins(start);
 
-    renderSchedule(currentIndex);
 
-  }else if(current < mins(S[0][0])){
+    const en =
+      mins(end);
 
-    const startSeconds =
-      mins(S[0][0]) * 60;
 
-    const nowSeconds =
-      now.getHours() * 3600 +
-      now.getMinutes() * 60 +
-      now.getSeconds();
+    /*
+      휴식은 오른쪽에서 숨김
+    */
 
-    $("remain").textContent =
-      formatRemain(startSeconds-nowSeconds);
+    if(name === "휴식"){
 
-    $("period").textContent = "시작 전";
-    $("label").textContent = "첫 교시까지";
-
-    $("progress").style.strokeDashoffset = C;
-
-    renderSchedule(-1);
-
-  }else{
-
-    $("remain").textContent = "00:00";
-    $("period").textContent = "오늘 끝";
-    $("label").textContent = "수고했어요";
-
-    $("progress").style.strokeDashoffset = C;
-
-    renderSchedule(-1);
-  }
-
-  /* 오늘 총 공부시간 */
-  let totalStudy = 0;
-
-  S.forEach(([start,end,name])=>{
-
-    if(
-      name === "휴식" ||
-      name === "점심" ||
-      name === "저녁"
-    ){
       return;
+
     }
 
-    const st = mins(start);
-    const en = mins(end);
 
-    if(current >= en){
-      totalStudy += en - st;
-    }else if(current > st){
-      totalStudy += current - st;
+    const row =
+      document.createElement("div");
+
+
+    row.className =
+      "row";
+
+
+    if(
+      current >= st &&
+      current < en
+    ){
+
+      row.classList.add("active");
+
+      activeIndex = i;
+
     }
+
+
+    const duration =
+      en - st;
+
+
+    row.innerHTML = `
+
+      <div class="time">
+        ${start} - ${end}
+      </div>
+
+      <div class="name">
+        ${name}
+      </div>
+
+      <div class="dur">
+        (${duration}')
+      </div>
+
+    `;
+
+
+    list.appendChild(row);
 
   });
 
+
+  return activeIndex;
+
+}
+
+
+/* =========================
+   총 공부시간 계산
+========================= */
+
+function updateTotalStudy(current){
+
+  let totalStudy = 0;
+
+
+  S.forEach(
+    ([start,end,name]) => {
+
+      if(
+        name === "휴식" ||
+        name === "점심" ||
+        name === "저녁"
+      ){
+
+        return;
+
+      }
+
+
+      const st =
+        mins(start);
+
+
+      const en =
+        mins(end);
+
+
+      if(current >= en){
+
+        totalStudy +=
+          en - st;
+
+      }
+
+      else if(current > st){
+
+        totalStudy +=
+          current - st;
+
+      }
+
+    }
+  );
+
+
   totalStudy =
-    Math.max(0,Math.floor(totalStudy));
+    Math.max(
+      0,
+      Math.floor(totalStudy)
+    );
+
 
   totalStudy =
     Math.min(
@@ -628,27 +1300,267 @@ function update(){
       TOTAL_STUDY_MINUTES
     );
 
+
   const h =
-    Math.floor(totalStudy / 60);
+    Math.floor(
+      totalStudy / 60
+    );
+
 
   const m =
     totalStudy % 60;
 
+
   const totalH =
-    Math.floor(TOTAL_STUDY_MINUTES / 60);
+    Math.floor(
+      TOTAL_STUDY_MINUTES / 60
+    );
+
 
   const totalM =
     TOTAL_STUDY_MINUTES % 60;
 
+
   $("total").textContent =
-    `${h}시간 ${pad(m)}분 / ${totalH}시간 ${pad(totalM)}분`;
+
+    `${h}시간 ${pad(m)}분 / ` +
+    `${totalH}시간 ${pad(totalM)}분`;
+
 }
+
+
+/* =========================
+   메인 업데이트
+========================= */
+
+function update(){
+
+  const now =
+    new Date();
+
+
+  updateDateClock();
+
+
+  const current =
+
+    now.getHours() * 60 +
+
+    now.getMinutes() +
+
+    now.getSeconds() / 60;
+
+
+  renderSchedule(current);
+
+
+  updateTotalStudy(current);
+
+
+  /*
+    휴식 포함 현재 시간대 찾기
+  */
+
+  let currentIndex = -1;
+
+
+  for(
+    let i = 0;
+    i < S.length;
+    i++
+  ){
+
+    const st =
+      mins(S[i][0]);
+
+
+    const en =
+      mins(S[i][1]);
+
+
+    if(
+      current >= st &&
+      current < en
+    ){
+
+      currentIndex = i;
+
+      break;
+
+    }
+
+  }
+
+
+  /* =========================
+     현재 시간대
+  ========================= */
+
+  if(currentIndex >= 0){
+
+    const [
+      start,
+      end,
+      name
+    ] = S[currentIndex];
+
+
+    const st =
+      mins(start);
+
+
+    const en =
+      mins(end);
+
+
+    const duration =
+      en - st;
+
+
+    const remainSec =
+
+      Math.max(
+        0,
+        Math.round(
+          (en - current) * 60
+        )
+      );
+
+
+    /*
+      시작 0
+      종료 1
+    */
+
+    const progress =
+
+      Math.min(
+        1,
+        Math.max(
+          0,
+          (current - st) /
+          duration
+        )
+      );
+
+
+    /*
+      공부/쉬는시간 모두
+      시작 100%
+      종료 0%
+    */
+
+    $("progress")
+      .style
+      .strokeDashoffset =
+        C * progress;
+
+
+    /*
+      공부시간
+    */
+
+    if(
+      name === "휴식" ||
+      name === "점심" ||
+      name === "저녁"
+    ){
+
+      $("period").textContent =
+        "쉬는 시간";
+
+    }
+
+    else{
+
+      $("period").textContent =
+        name;
+
+    }
+
+
+    $("remain").textContent =
+      formatRemain(remainSec);
+
+
+    return;
+
+  }
+
+
+  /* =========================
+     첫 교시 전
+  ========================= */
+
+  if(
+    current <
+    mins(S[0][0])
+  ){
+
+    const startTime =
+      mins(S[0][0]);
+
+
+    const diff =
+
+      Math.max(
+        0,
+        Math.round(
+          (startTime - current) *
+          60
+        )
+      );
+
+
+    $("period").textContent =
+      "시작 전";
+
+
+    $("remain").textContent =
+      formatRemain(diff);
+
+
+    $("progress")
+      .style
+      .strokeDashoffset = C;
+
+
+    return;
+
+  }
+
+
+  /* =========================
+     하루 끝
+  ========================= */
+
+  $("period").textContent =
+    "오늘 끝";
+
+
+  $("remain").textContent =
+    "수고했어요";
+
+
+  $("progress")
+    .style
+    .strokeDashoffset = C;
+
+}
+
+
+/* =========================
+   실행
+========================= */
 
 update();
 
-setInterval(update,1000);
+setInterval(
+  update,
+  1000
+);
+
 </script>
 
 </body>
 </html>
-
