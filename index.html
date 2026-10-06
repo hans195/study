@@ -1447,24 +1447,19 @@ function update(){
       공부시간
     */
 
-    if(
-      name === "휴식" ||
-      name === "점심" ||
-      name === "저녁"
-    ){
+    if(name === "휴식"){
 
-      $("period").textContent =
-        "쉬는 시간";
+  $("period").textContent =
+    "쉬는 시간";
 
-    }
+}
 
-    else{
+else{
 
-      $("period").textContent =
-        name;
+  $("period").textContent =
+    name;
 
-    }
-
+}
 
     $("remain").textContent =
       formatRemain(remainSec);
