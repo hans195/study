@@ -30,7 +30,7 @@ body{
   width:100%;
   height:100%;
   max-width:600px;
-  padding:18px 18px;
+  padding:18px;
   display:flex;
   flex-direction:column;
 }
@@ -213,10 +213,15 @@ body{
     height:100vh;
     max-height:650px;
     padding:14px 24px;
+
     display:grid;
-    grid-template-columns:50% 50%;
+
+    /* 왼쪽 65% / 오른쪽 35% */
+    grid-template-columns:65% 35%;
+
     grid-template-rows:auto 1fr;
-    column-gap:18px;
+
+    column-gap:10px;
   }
 
   .top{
@@ -228,10 +233,14 @@ body{
   .ringWrap{
     grid-column:1;
     grid-row:1 / span 2;
+
     margin:0;
+
     align-self:center;
     justify-self:center;
+
     transform:translateY(-25px);
+
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -249,13 +258,19 @@ body{
   .total{
     grid-column:1;
     grid-row:1 / span 2;
+
     align-self:center;
     justify-self:center;
+
     width:auto;
     min-width:205px;
+
     padding:8px 13px;
+
     margin-top:370px;
+
     border-radius:12px;
+
     position:relative;
     z-index:2;
   }
@@ -268,48 +283,59 @@ body{
     font-size:12px;
   }
 
-  /* 오른쪽 시간표를 세로 중앙 배치 */
+  /* 오른쪽 타임라인 */
   .right{
     grid-column:2;
     grid-row:1 / span 2;
+
     align-self:center;
+
+    width:100%;
+    max-width:260px;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
+
     transform:none;
-    padding-top:0;
+    padding:0;
+
+    margin-left:auto;
   }
 
   .list{
     display:grid;
-    gap:5px;
+    gap:4px;
   }
 
-  /* 시간표 전체 폭을 컴팩트하게 */
+  /* 전체적으로 작고 촘촘하게 */
   .row{
-    grid-template-columns:60px auto 45px;
-    column-gap:5px;
-    min-height:41px;
-    padding:8px 12px;
-    border-radius:12px;
+    grid-template-columns:52px auto 38px;
+    column-gap:2px;
+
+    min-height:36px;
+
+    padding:6px 8px;
+
+    border-radius:10px;
   }
 
   .time{
-    font-size:12px;
+    font-size:10px;
   }
 
   .name{
-    font-size:14px;
-  }
-
-  .dur{
     font-size:12px;
   }
 
+  .dur{
+    font-size:10px;
+  }
+
   .footer{
-    margin-top:6px;
+    margin-top:5px;
     text-align:center;
-    font-size:9px;
+    font-size:8px;
     line-height:1;
   }
 }
@@ -318,8 +344,10 @@ body{
 
   .app{
     padding:8px 16px;
-    grid-template-columns:50% 50%;
-    column-gap:12px;
+
+    grid-template-columns:65% 35%;
+
+    column-gap:8px;
   }
 
   .date{
@@ -374,7 +402,7 @@ body{
 
   .right{
     align-self:center;
-    padding-top:0;
+    max-width:220px;
   }
 
   .list{
@@ -382,24 +410,27 @@ body{
   }
 
   .row{
-    grid-template-columns:60px auto 45px;
-    column-gap:5px;
-    min-height:31px;
-    padding:5px 9px;
+    grid-template-columns:48px auto 34px;
+    column-gap:1px;
+
+    min-height:29px;
+    padding:4px 7px;
+
+    border-radius:9px;
   }
 
   .time,
   .dur{
-    font-size:10px;
+    font-size:9px;
   }
 
   .name{
-    font-size:12px;
+    font-size:11px;
   }
 
   .footer{
     margin-top:1px;
-    font-size:8px;
+    font-size:7px;
   }
 }
 </style>
@@ -472,7 +503,8 @@ function mins(t){
 }
 
 function formatRemain(sec){
-  sec = Math.max(0, Math.floor(sec));
+
+  sec = Math.max(0,Math.floor(sec));
 
   const h = Math.floor(sec / 3600);
   const m = Math.floor((sec % 3600) / 60);
@@ -493,16 +525,12 @@ function render(){
   const m = now.getMinutes();
   const s = now.getSeconds();
 
-  const current = h * 60 + m + s / 60;
+  const current =
+    h * 60 + m + s / 60;
 
   const weekdays = [
-    "일요일",
-    "월요일",
-    "화요일",
-    "수요일",
-    "목요일",
-    "금요일",
-    "토요일"
+    "일요일","월요일","화요일",
+    "수요일","목요일","금요일","토요일"
   ];
 
   $("date").textContent =
@@ -568,12 +596,12 @@ function render(){
     const en = mins(end);
 
     const remainSec =
-      Math.max(0, Math.round((en - current) * 60));
+      Math.max(0,Math.round((en-current)*60));
 
     const progress =
       Math.min(
         1,
-        Math.max(0,(current - st) / (en - st))
+        Math.max(0,(current-st)/(en-st))
       );
 
     $("period").textContent = name;
@@ -582,7 +610,7 @@ function render(){
       formatRemain(remainSec);
 
     $("progress").style.strokeDashoffset =
-      C * (1 - progress);
+      C * (1-progress);
 
   }else{
 
@@ -593,7 +621,7 @@ function render(){
       const diff =
         Math.max(
           0,
-          Math.round((mins(S[0][0]) - current) * 60)
+          Math.round((mins(S[0][0])-current)*60)
         );
 
       $("period").textContent = "시작 전";
@@ -611,7 +639,6 @@ function render(){
 }
 
 render();
-
 setInterval(render,1000);
 </script>
 
