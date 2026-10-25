@@ -21,12 +21,8 @@ html, body {
   overflow: hidden;
   background: #090d14;
   color: white;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Apple SD Gothic Neo",
-    "Noto Sans KR",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
 body {
@@ -39,7 +35,7 @@ body {
   width: 100%;
   height: 100%;
   max-width: 600px;
-  padding: 18px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
 }
@@ -50,21 +46,21 @@ body {
 }
 
 .date {
-  font-size: 18px;
+  font-size: 17px;
   color: #9aa4b2;
   margin-bottom: 3px;
 }
 
 .clock {
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 700;
   letter-spacing: -1px;
 }
 
 .badge {
   display: inline-block;
-  margin-top: 6px;
-  padding: 5px 9px;
+  margin-top: 5px;
+  padding: 4px 9px;
   border-radius: 999px;
   background: #2a2614;
   color: #facc15;
@@ -74,16 +70,16 @@ body {
 
 .ringWrap {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
-  margin: 8px 0;
+  min-height: 0;
+  margin: 6px 0;
 }
 
 .ring {
-  width: min(58vw, 280px);
-  height: min(58vw, 280px);
+  width: min(55vw, 270px);
+  aspect-ratio: 1;
   position: relative;
 }
 
@@ -118,13 +114,13 @@ body {
 }
 
 .period {
-  font-size: 15px;
+  font-size: 14px;
   color: #9aa4b2;
   margin-bottom: 5px;
 }
 
 .remain {
-  font-size: 46px;
+  font-size: clamp(27px, 8vw, 46px);
   font-weight: 800;
   letter-spacing: -2px;
 }
@@ -137,9 +133,9 @@ body {
 
 .total {
   flex: none;
-  width: fit-content;
   min-width: 190px;
-  margin: -2px auto 10px;
+  width: fit-content;
+  margin: 4px auto 10px;
   padding: 8px 13px;
   border: 1px solid #202938;
   border-radius: 12px;
@@ -151,7 +147,7 @@ body {
   display: block;
   color: #8b95a5;
   font-size: 9px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .total strong {
@@ -160,56 +156,56 @@ body {
 
 .right {
   flex: none;
+  min-height: 0;
 }
 
 .tableTitle {
   color: #697386;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   text-align: center;
 }
 
 .list {
   display: grid;
-  gap: 0;
+  gap: 1px;
 }
 
 .row {
   display: grid;
-  grid-template-columns: 70px 1fr auto;
-  column-gap: 8px;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  column-gap: 9px;
   align-items: center;
-  min-height: 45px;
-  padding: 9px 12px;
+  min-height: 33px;
+  padding: 5px 8px;
   border: 1px solid #1d2635;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #111722;
 }
 
 .row.active {
   background: #2a2614;
   border-color: #facc15;
-  box-shadow: 0 0 0 1px rgba(250,204,21,.18);
+}
+
+.name {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .time {
-  font-size: 12px;
+  font-size: 10px;
   color: #8b95a5;
   font-weight: 700;
   white-space: nowrap;
 }
 
-.name {
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .dur {
-  font-size: 12px;
+  font-size: 10px;
   color: #8b95a5;
-  text-align: right;
   white-space: nowrap;
 }
 
@@ -217,120 +213,111 @@ body {
   color: #fde047;
 }
 
-/* 가로 화면 */
-
+/* 가로 화면: 왼쪽 타이머 + 오른쪽 시간표 */
 @media (orientation: landscape) {
   .app {
     max-width: 1100px;
     width: 100%;
-    height: 100vh;
-    max-height: 650px;
-    position: relative;
-    top: 20px;
-    left: -25px;
+    height: 100dvh;
     padding:
-      calc(14px + env(safe-area-inset-top))
-      calc(24px + env(safe-area-inset-right))
-      calc(14px + env(safe-area-inset-bottom))
-      calc(24px + env(safe-area-inset-left));
+      calc(10px + env(safe-area-inset-top))
+      calc(18px + env(safe-area-inset-right))
+      calc(10px + env(safe-area-inset-bottom))
+      calc(18px + env(safe-area-inset-left));
     display: grid;
-    grid-template-columns: 65% 35%;
-    grid-template-rows: auto 1fr;
-    column-gap: 10px;
+    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    column-gap: 12px;
   }
 
   .top {
     grid-column: 1;
     grid-row: 1;
-    align-self: start;
+    z-index: 1;
   }
 
   .ringWrap {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 2;
     margin: 0;
-    align-self: center;
-    justify-self: center;
-    transform: translateY(-4px);
+    min-height: 0;
   }
 
   .ring {
-    width: min(62vh, 390px);
-    height: min(62vh, 390px);
+    width: min(50vh, 350px);
+    max-height: 100%;
   }
 
   .remain {
-    font-size: 56px;
+    font-size: clamp(30px, 6vh, 54px);
   }
 
   .period {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .total {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 3;
     align-self: center;
     justify-self: center;
-    width: auto;
+    margin: 4px auto 0;
     min-width: 215px;
-    margin-top: 325px;
-    position: relative;
-    z-index: 2;
   }
 
   .right {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 1 / 4;
     align-self: center;
+    justify-self: center;
     width: 100%;
-    max-width: 260px;
+    max-width: 360px;
+    max-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-left: auto;
-  }
-
-  .list {
-    transform: translateX(-30px);
   }
 
   .tableTitle {
-    transform: translateX(-30px);
+    flex: none;
+    margin-bottom: 5px;
+  }
+
+  .list {
+    min-height: 0;
+    grid-template-rows: repeat(12, minmax(0, 1fr));
+    height: min(88dvh, 540px);
+    gap: 1px;
   }
 
   .row {
-    grid-template-columns: 82px 1fr auto;
-    column-gap: 4px;
-    min-height: 32px;
-    padding: 4px 5px 4px 8px;
-    border-radius: 8px;
-  }
-
-  .time, .dur {
-    font-size: 10px;
+    min-height: 0;
+    height: 100%;
+    padding: 2px 7px;
+    border-radius: 7px;
+    column-gap: 6px;
   }
 
   .name {
-    font-size: 12px;
+    font-size: clamp(10px, 1.8vh, 13px);
+  }
+
+  .time, .dur {
+    font-size: clamp(8px, 1.55vh, 11px);
   }
 }
 
 /* 높이가 낮은 가로 화면 */
-
 @media (orientation: landscape) and (max-height: 430px) {
   .app {
     padding:
-      calc(8px + env(safe-area-inset-top))
-      calc(16px + env(safe-area-inset-right))
-      calc(8px + env(safe-area-inset-bottom))
-      calc(16px + env(safe-area-inset-left));
-    grid-template-columns: 65% 35%;
-    column-gap: 8px;
+      calc(6px + env(safe-area-inset-top))
+      calc(12px + env(safe-area-inset-right))
+      calc(6px + env(safe-area-inset-bottom))
+      calc(12px + env(safe-area-inset-left));
   }
 
   .date {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .clock {
@@ -338,22 +325,21 @@ body {
   }
 
   .badge {
-    margin-top: 3px;
-    padding: 3px 6px;
     font-size: 8px;
+    margin-top: 2px;
+    padding: 3px 7px;
   }
 
   .ring {
-    width: min(53vh, 290px);
-    height: min(53vh, 290px);
+    width: min(46vh, 290px);
+  }
+
+  .remain {
+    font-size: clamp(27px, 6vh, 40px);
   }
 
   .period {
     font-size: 12px;
-  }
-
-  .remain {
-    font-size: 40px;
   }
 
   .label {
@@ -361,9 +347,8 @@ body {
   }
 
   .total {
+    padding: 5px 10px;
     min-width: 175px;
-    padding: 6px 10px;
-    margin-top: 250px;
   }
 
   .total small {
@@ -374,29 +359,45 @@ body {
     font-size: 10px;
   }
 
-  .right {
-    max-width: 220px;
+  .tableTitle {
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+
+  .list {
+    height: min(90dvh, 370px);
   }
 
   .row {
-    grid-template-columns: 76px 1fr auto;
-    column-gap: 3px;
-    min-height: 28px;
-    padding: 3px 4px 3px 7px;
-  }
-
-  .time, .dur {
-    font-size: 9px;
+    padding: 1px 5px;
   }
 
   .name {
-    font-size: 11px;
+    font-size: 10px;
   }
 
-  .tableTitle {
-    font-size: 10px;
-    letter-spacing: 1.3px;
-    margin-bottom: 4px;
+  .time, .dur {
+    font-size: 8px;
+  }
+}
+
+/* 세로 화면에서는 오른쪽 시간표 스크롤 허용 */
+@media (orientation: portrait) {
+  .app {
+    overflow-y: auto;
+  }
+
+  .ringWrap {
+    flex: none;
+    margin: 12px 0;
+  }
+
+  .ring {
+    width: min(55vw, 260px);
+  }
+
+  .right {
+    padding-bottom: 12px;
   }
 }
 </style>
@@ -431,9 +432,7 @@ body {
 
   <div class="total">
     <small>오늘 총 공부시간</small>
-    <strong id="total">
-      0시간 00분 / 11시간 10분
-    </strong>
+    <strong id="total">0시간 00분 / 11시간 10분</strong>
   </div>
 
   <div class="right">
@@ -446,7 +445,6 @@ body {
 <script>
 const $ = id => document.getElementById(id);
 
-/* 최종 시간표 */
 const S = [
   ["Lecture 1", "08:30", "10:00"],
   ["Break", "10:00", "10:15"],
@@ -476,18 +474,6 @@ function mins(t) {
   return h * 60 + m;
 }
 
-function formatRemain(sec) {
-  sec = Math.max(0, Math.floor(sec));
-
-  const h = Math.floor(sec / 3600);
-  const m = Math.floor((sec % 3600) / 60);
-  const s = sec % 60;
-
-  return h > 0
-    ? `${h}:${pad(m)}:${pad(s)}`
-    : `${pad(m)}:${pad(s)}`;
-}
-
 function isRest(name) {
   return ["Break", "Lunch", "Dinner"].includes(name);
 }
@@ -498,33 +484,28 @@ const TOTAL_STUDY_MINUTES = S.reduce(
   0
 );
 
-/* 원형 게이지 */
+function formatRemain(sec) {
+  sec = Math.max(0, Math.floor(sec));
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+
+  return h > 0
+    ? `${h}:${pad(m)}:${pad(s)}`
+    : `${pad(m)}:${pad(s)}`;
+}
+
 const C = 2 * Math.PI * 136;
 $("progress").style.strokeDasharray = C;
 $("progress").style.strokeDashoffset = C;
 
-/* 날짜와 시계 */
-function updateDateClock() {
-  const now = new Date();
-  const days = ["일", "월", "화", "수", "목", "금", "토"];
-
-  $("date").textContent =
-    `${now.getFullYear()}년 ${now.getMonth() + 1}월 ` +
-    `${now.getDate()}일 (${days[now.getDay()]})`;
-
-  $("clock").textContent =
-    `${pad(now.getHours())}:` +
-    `${pad(now.getMinutes())}:` +
-    `${pad(now.getSeconds())}`;
-}
-
-/* 오른쪽 시간표 - Break, Lunch, Dinner 숨김 */
+/* 오른쪽에는 공부 과목만 표시 */
 function renderSchedule(current) {
   const list = $("list");
   list.innerHTML = "";
 
   S.forEach(([name, start, end]) => {
-    if (["Break", "Lunch", "Dinner"].includes(name)) return;
+    if (isRest(name)) return;
 
     const st = mins(start);
     const en = mins(end);
@@ -546,7 +527,7 @@ function renderSchedule(current) {
   });
 }
 
-/* 누적 공부시간 */
+/* 누적 순공부 시간 */
 function updateTotalStudy(current) {
   let studied = 0;
 
@@ -574,11 +555,18 @@ function updateTotalStudy(current) {
     `${pad(TOTAL_STUDY_MINUTES % 60)}분`;
 }
 
-/* 원형 타이머 */
 function update() {
   const now = new Date();
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
 
-  updateDateClock();
+  $("date").textContent =
+    `${now.getFullYear()}년 ${now.getMonth() + 1}월 ` +
+    `${now.getDate()}일 (${days[now.getDay()]})`;
+
+  $("clock").textContent =
+    `${pad(now.getHours())}:` +
+    `${pad(now.getMinutes())}:` +
+    `${pad(now.getSeconds())}`;
 
   const current =
     now.getHours() * 60 +
@@ -597,30 +585,24 @@ function update() {
     const [name, start, end] = active;
     const st = mins(start);
     const en = mins(end);
-
     const progress = (current - st) / (en - st);
-    const remainSec = Math.round((en - current) * 60);
 
     $("progress").style.strokeDashoffset = C * progress;
-
     $("period").textContent =
       name === "Break" ? "쉬는 시간" : name;
-
-    $("remain").textContent = formatRemain(remainSec);
+    $("remain").textContent =
+      formatRemain((en - current) * 60);
     return;
   }
 
-  /* 첫 수업 시작 전 */
   if (current < mins(S[0][1])) {
-    const diff = (mins(S[0][1]) - current) * 60;
-
     $("period").textContent = "시작 전";
-    $("remain").textContent = formatRemain(diff);
+    $("remain").textContent =
+      formatRemain((mins(S[0][1]) - current) * 60);
     $("progress").style.strokeDashoffset = C;
     return;
   }
 
-  /* 모든 수업 종료 */
   $("period").textContent = "오늘 끝";
   $("remain").textContent = "수고했어요";
   $("progress").style.strokeDashoffset = C;
@@ -629,6 +611,5 @@ function update() {
 update();
 setInterval(update, 1000);
 </script>
-
 </body>
 </html>
