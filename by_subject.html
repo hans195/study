@@ -300,11 +300,13 @@ body {
     transform: translateX(-30px);
   }
 
+  /* 세로 두께만 살짝 줄임 */
   .row {
     grid-template-columns: 82px 1fr auto;
     column-gap: 4px;
-    min-height: 30px;
-    padding: 3px 5px 3px 8px;
+    min-height: 0;
+    height: 29px;
+    padding: 2px 5px 2px 8px;
     border-radius: 8px;
   }
 
@@ -379,11 +381,13 @@ body {
     max-width: 220px;
   }
 
+  /* 작은 가로 화면에서는 조금 더 압축 */
   .row {
     grid-template-columns: 76px 1fr auto;
     column-gap: 3px;
-    min-height: 28px;
-    padding: 3px 4px 3px 7px;
+    min-height: 0;
+    height: 26px;
+    padding: 1px 4px 1px 7px;
   }
 
   .time, .dur {
@@ -478,6 +482,7 @@ function mins(t) {
 
 function formatRemain(sec) {
   sec = Math.max(0, Math.floor(sec));
+
   const h = Math.floor(sec / 3600);
   const m = Math.floor((sec % 3600) / 60);
   const s = sec % 60;
@@ -596,8 +601,10 @@ function update() {
     const remainSec = Math.round((en - current) * 60);
 
     $("progress").style.strokeDashoffset = C * progress;
+
     $("period").textContent =
       name === "Break" ? "쉬는 시간" : name;
+
     $("remain").textContent = formatRemain(remainSec);
     return;
   }
