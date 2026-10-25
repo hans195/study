@@ -300,12 +300,12 @@ body {
     transform: translateX(-30px);
   }
 
-  /* 세로 두께만 살짝 줄임 */
+  /* 가로 길이는 그대로, 칸 높이만 31px */
   .row {
     grid-template-columns: 82px 1fr auto;
     column-gap: 4px;
     min-height: 0;
-    height: 29px;
+    height: 31px;
     padding: 2px 5px 2px 8px;
     border-radius: 8px;
   }
@@ -381,12 +381,12 @@ body {
     max-width: 220px;
   }
 
-  /* 작은 가로 화면에서는 조금 더 압축 */
+  /* 작은 가로 화면에서도 31px */
   .row {
     grid-template-columns: 76px 1fr auto;
     column-gap: 3px;
     min-height: 0;
-    height: 26px;
+    height: 31px;
     padding: 1px 4px 1px 7px;
   }
 
