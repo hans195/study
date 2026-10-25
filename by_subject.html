@@ -289,6 +289,7 @@ body {
     flex-direction: column;
     justify-content: center;
     margin-left: auto;
+    transform: translateY(-30px);
   }
 
   .list {
@@ -446,7 +447,6 @@ body {
 <script>
 const $ = id => document.getElementById(id);
 
-/* 최종 시간표 */
 const S = [
   ["Lecture 1", "08:30", "10:00"],
   ["Break", "10:00", "10:15"],
@@ -478,7 +478,6 @@ function mins(t) {
 
 function formatRemain(sec) {
   sec = Math.max(0, Math.floor(sec));
-
   const h = Math.floor(sec / 3600);
   const m = Math.floor((sec % 3600) / 60);
   const s = sec % 60;
@@ -498,12 +497,10 @@ const TOTAL_STUDY_MINUTES = S.reduce(
   0
 );
 
-/* 원형 게이지 */
 const C = 2 * Math.PI * 136;
 $("progress").style.strokeDasharray = C;
 $("progress").style.strokeDashoffset = C;
 
-/* 날짜와 시계 */
 function updateDateClock() {
   const now = new Date();
   const days = ["일", "월", "화", "수", "목", "금", "토"];
@@ -518,13 +515,12 @@ function updateDateClock() {
     `${pad(now.getSeconds())}`;
 }
 
-/* 오른쪽 시간표 - Break, Lunch, Dinner 숨김 */
 function renderSchedule(current) {
   const list = $("list");
   list.innerHTML = "";
 
   S.forEach(([name, start, end]) => {
-    if (["Break", "Lunch", "Dinner"].includes(name)) return;
+    if (isRest(name)) return;
 
     const st = mins(start);
     const en = mins(end);
@@ -546,7 +542,6 @@ function renderSchedule(current) {
   });
 }
 
-/* 누적 공부시간 */
 function updateTotalStudy(current) {
   let studied = 0;
 
@@ -574,7 +569,6 @@ function updateTotalStudy(current) {
     `${pad(TOTAL_STUDY_MINUTES % 60)}분`;
 }
 
-/* 원형 타이머 */
 function update() {
   const now = new Date();
 
@@ -602,15 +596,12 @@ function update() {
     const remainSec = Math.round((en - current) * 60);
 
     $("progress").style.strokeDashoffset = C * progress;
-
     $("period").textContent =
       name === "Break" ? "쉬는 시간" : name;
-
     $("remain").textContent = formatRemain(remainSec);
     return;
   }
 
-  /* 첫 수업 시작 전 */
   if (current < mins(S[0][1])) {
     const diff = (mins(S[0][1]) - current) * 60;
 
@@ -620,7 +611,6 @@ function update() {
     return;
   }
 
-  /* 모든 수업 종료 */
   $("period").textContent = "오늘 끝";
   $("remain").textContent = "수고했어요";
   $("progress").style.strokeDashoffset = C;
@@ -629,6 +619,5 @@ function update() {
 update();
 setInterval(update, 1000);
 </script>
-
 </body>
 </html>
