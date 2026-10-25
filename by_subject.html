@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +10,9 @@
 <title>by subject</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
@@ -19,8 +21,12 @@ html, body {
   overflow: hidden;
   background: #090d14;
   color: white;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    sans-serif;
 }
 
 body {
@@ -512,13 +518,13 @@ function updateDateClock() {
     `${pad(now.getSeconds())}`;
 }
 
-/* 오른쪽 시간표 - Break 숨김 */
+/* 오른쪽 시간표 - Break, Lunch, Dinner 숨김 */
 function renderSchedule(current) {
   const list = $("list");
   list.innerHTML = "";
 
   S.forEach(([name, start, end]) => {
-    if (name === "Break") return;
+    if (["Break", "Lunch", "Dinner"].includes(name)) return;
 
     const st = mins(start);
     const en = mins(end);
@@ -626,3 +632,4 @@ setInterval(update, 1000);
 
 </body>
 </html>
+```
