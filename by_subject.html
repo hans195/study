@@ -18,54 +18,52 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background: #090d14;
-  color: white;
+  color: #fff;
   font-family: -apple-system, BlinkMacSystemFont,
     "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
 .app {
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   max-width: 600px;
-  padding: 14px;
+  margin: 0 auto;
+  padding: 16px;
   display: flex;
   flex-direction: column;
 }
 
 .top {
   text-align: center;
-  flex: none;
+  flex-shrink: 0;
 }
 
 .date {
-  font-size: 17px;
   color: #9aa4b2;
-  margin-bottom: 3px;
+  font-size: 18px;
+  margin-bottom: 4px;
 }
 
 .clock {
-  font-size: 27px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 750;
   letter-spacing: -1px;
 }
 
 .badge {
   display: inline-block;
-  margin-top: 5px;
-  padding: 4px 9px;
-  border-radius: 999px;
+  margin-top: 6px;
+  padding: 5px 10px;
   background: #2a2614;
   color: #facc15;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
+  border-radius: 20px;
 }
 
 .ringWrap {
@@ -74,11 +72,11 @@ body {
   justify-content: center;
   flex: 1;
   min-height: 0;
-  margin: 6px 0;
+  padding: 10px 0;
 }
 
 .ring {
-  width: min(55vw, 270px);
+  width: min(58vw, 280px);
   aspect-ratio: 1;
   position: relative;
 }
@@ -114,75 +112,76 @@ body {
 }
 
 .period {
-  font-size: 14px;
+  font-size: 15px;
   color: #9aa4b2;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .remain {
-  font-size: clamp(27px, 8vw, 46px);
+  font-size: clamp(30px, 8vw, 52px);
   font-weight: 800;
   letter-spacing: -2px;
+  white-space: nowrap;
 }
 
 .label {
-  margin-top: 3px;
-  font-size: 11px;
+  margin-top: 5px;
   color: #8b95a5;
+  font-size: 11px;
 }
 
 .total {
-  flex: none;
-  min-width: 190px;
   width: fit-content;
-  margin: 4px auto 10px;
-  padding: 8px 13px;
-  border: 1px solid #202938;
-  border-radius: 12px;
+  min-width: 205px;
+  margin: 0 auto 12px;
+  padding: 10px 16px;
+  border: 1px solid #263143;
   background: #111722;
+  border-radius: 14px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .total small {
   display: block;
   color: #8b95a5;
-  font-size: 9px;
-  margin-bottom: 3px;
+  font-size: 10px;
+  margin-bottom: 6px;
 }
 
 .total strong {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .right {
-  flex: none;
+  flex-shrink: 0;
   min-height: 0;
 }
 
 .tableTitle {
-  color: #697386;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  margin-bottom: 5px;
   text-align: center;
+  color: #697386;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 7px;
 }
 
 .list {
   display: grid;
-  gap: 1px;
+  gap: 2px;
 }
 
 .row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
-  column-gap: 9px;
   align-items: center;
-  min-height: 33px;
-  padding: 5px 8px;
-  border: 1px solid #1d2635;
-  border-radius: 8px;
+  column-gap: 10px;
+  height: 43px;
+  padding: 7px 12px;
   background: #111722;
+  border: 1px solid #263143;
+  border-radius: 12px;
 }
 
 .row.active {
@@ -191,21 +190,21 @@ body {
 }
 
 .name {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .time {
-  font-size: 10px;
-  color: #8b95a5;
+  font-size: 12px;
+  color: #929cab;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .dur {
-  font-size: 10px;
-  color: #8b95a5;
+  font-size: 12px;
+  color: #929cab;
   white-space: nowrap;
 }
 
@@ -213,107 +212,104 @@ body {
   color: #fde047;
 }
 
-/* 가로 화면: 왼쪽 타이머 + 오른쪽 시간표 */
+/* 가로 화면 */
 @media (orientation: landscape) {
   .app {
     max-width: 1100px;
-    width: 100%;
-    height: 100dvh;
     padding:
       calc(10px + env(safe-area-inset-top))
       calc(18px + env(safe-area-inset-right))
       calc(10px + env(safe-area-inset-bottom))
       calc(18px + env(safe-area-inset-left));
     display: grid;
-    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
+    grid-template-columns: 58% 42%;
     grid-template-rows: auto minmax(0, 1fr) auto;
-    column-gap: 12px;
+    column-gap: 14px;
   }
 
   .top {
     grid-column: 1;
     grid-row: 1;
-    z-index: 1;
+    align-self: start;
   }
 
   .ringWrap {
     grid-column: 1;
     grid-row: 2;
-    margin: 0;
-    min-height: 0;
+    padding: 0;
   }
 
   .ring {
-    width: min(50vh, 350px);
+    width: min(52vh, 380px);
     max-height: 100%;
   }
 
   .remain {
-    font-size: clamp(30px, 6vh, 54px);
-  }
-
-  .period {
-    font-size: 15px;
+    font-size: clamp(32px, 6.8vh, 60px);
   }
 
   .total {
     grid-column: 1;
     grid-row: 3;
-    align-self: center;
     justify-self: center;
-    margin: 4px auto 0;
+    margin: 5px auto 0;
     min-width: 215px;
   }
 
+  /* 오른쪽 시간표를 위로 올림 */
   .right {
     grid-column: 2;
     grid-row: 1 / 4;
-    align-self: center;
+    align-self: start;
     justify-self: center;
     width: 100%;
-    max-width: 360px;
-    max-height: 100%;
+    max-width: 390px;
+    padding-top: 0;
     display: flex;
     flex-direction: column;
+    max-height: 100%;
   }
 
   .tableTitle {
-    flex: none;
-    margin-bottom: 5px;
+    flex-shrink: 0;
+    margin-bottom: 6px;
   }
 
   .list {
     min-height: 0;
-    grid-template-rows: repeat(12, minmax(0, 1fr));
-    height: min(88dvh, 540px);
-    gap: 1px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    gap: 2px;
   }
 
+  /* 원래처럼 도톰한 시간표 칸 */
   .row {
-    min-height: 0;
-    height: 100%;
-    padding: 2px 7px;
-    border-radius: 7px;
-    column-gap: 6px;
+    height: clamp(35px, 5.5vh, 43px);
+    min-height: clamp(35px, 5.5vh, 43px);
+    padding: 5px 10px;
+    border-radius: 10px;
+    column-gap: 8px;
   }
 
   .name {
-    font-size: clamp(10px, 1.8vh, 13px);
+    font-size: clamp(11px, 1.85vh, 14px);
   }
 
   .time, .dur {
-    font-size: clamp(8px, 1.55vh, 11px);
+    font-size: clamp(9px, 1.6vh, 12px);
   }
 }
 
-/* 높이가 낮은 가로 화면 */
+/* 아이폰 가로 화면처럼 높이가 낮을 때 */
 @media (orientation: landscape) and (max-height: 430px) {
   .app {
     padding:
       calc(6px + env(safe-area-inset-top))
-      calc(12px + env(safe-area-inset-right))
+      calc(10px + env(safe-area-inset-right))
       calc(6px + env(safe-area-inset-bottom))
-      calc(12px + env(safe-area-inset-left));
+      calc(10px + env(safe-area-inset-left));
+    grid-template-columns: 57% 43%;
+    column-gap: 8px;
   }
 
   .date {
@@ -325,21 +321,21 @@ body {
   }
 
   .badge {
-    font-size: 8px;
-    margin-top: 2px;
+    margin-top: 3px;
     padding: 3px 7px;
+    font-size: 8px;
   }
 
   .ring {
-    width: min(46vh, 290px);
-  }
-
-  .remain {
-    font-size: clamp(27px, 6vh, 40px);
+    width: min(48vh, 290px);
   }
 
   .period {
     font-size: 12px;
+  }
+
+  .remain {
+    font-size: clamp(26px, 6vh, 40px);
   }
 
   .label {
@@ -347,12 +343,13 @@ body {
   }
 
   .total {
-    padding: 5px 10px;
-    min-width: 175px;
+    min-width: 180px;
+    padding: 6px 10px;
   }
 
   .total small {
     font-size: 8px;
+    margin-bottom: 3px;
   }
 
   .total strong {
@@ -361,43 +358,55 @@ body {
 
   .tableTitle {
     font-size: 10px;
-    margin-bottom: 3px;
-  }
-
-  .list {
-    height: min(90dvh, 370px);
+    margin-bottom: 4px;
   }
 
   .row {
-    padding: 1px 5px;
+    height: 34px;
+    min-height: 34px;
+    padding: 3px 7px;
+    border-radius: 8px;
   }
 
   .name {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .time, .dur {
-    font-size: 8px;
+    font-size: 9px;
   }
 }
 
-/* 세로 화면에서는 오른쪽 시간표 스크롤 허용 */
+/* 세로 화면 */
 @media (orientation: portrait) {
+  body {
+    overflow: auto;
+  }
+
   .app {
-    overflow-y: auto;
+    height: auto;
+    min-height: 100dvh;
   }
 
   .ringWrap {
     flex: none;
-    margin: 12px 0;
-  }
-
-  .ring {
-    width: min(55vw, 260px);
+    padding: 18px 0;
   }
 
   .right {
-    padding-bottom: 12px;
+    padding-bottom: 20px;
+  }
+
+  .row {
+    height: 42px;
+  }
+
+  .name {
+    font-size: 12px;
+  }
+
+  .time, .dur {
+    font-size: 10px;
   }
 }
 </style>
@@ -484,22 +493,25 @@ const TOTAL_STUDY_MINUTES = S.reduce(
   0
 );
 
-function formatRemain(sec) {
-  sec = Math.max(0, Math.floor(sec));
-  const h = Math.floor(sec / 3600);
-  const m = Math.floor((sec % 3600) / 60);
-  const s = sec % 60;
+function formatRemain(seconds) {
+  seconds = Math.max(0, Math.ceil(seconds));
+
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
 
   return h > 0
     ? `${h}:${pad(m)}:${pad(s)}`
     : `${pad(m)}:${pad(s)}`;
 }
 
+/* 원형 타이머 */
 const C = 2 * Math.PI * 136;
+
 $("progress").style.strokeDasharray = C;
 $("progress").style.strokeDashoffset = C;
 
-/* 오른쪽에는 공부 과목만 표시 */
+/* 시간표: 공부 과목만 표시 */
 function renderSchedule(current) {
   const list = $("list");
   list.innerHTML = "";
@@ -527,7 +539,7 @@ function renderSchedule(current) {
   });
 }
 
-/* 누적 순공부 시간 */
+/* 순공부 시간 */
 function updateTotalStudy(current) {
   let studied = 0;
 
@@ -555,6 +567,7 @@ function updateTotalStudy(current) {
     `${pad(TOTAL_STUDY_MINUTES % 60)}분`;
 }
 
+/* 날짜, 현재 시간, 원형 진행률 */
 function update() {
   const now = new Date();
   const days = ["일", "월", "화", "수", "목", "금", "토"];
@@ -585,6 +598,7 @@ function update() {
     const [name, start, end] = active;
     const st = mins(start);
     const en = mins(end);
+
     const progress = (current - st) / (en - st);
 
     $("progress").style.strokeDashoffset = C * progress;
