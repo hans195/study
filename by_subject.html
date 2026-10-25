@@ -18,66 +18,72 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background: #090d14;
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: white;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    sans-serif;
 }
 
 body {
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app {
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
 }
 
 .top {
   text-align: center;
-  flex-shrink: 0;
+  flex: none;
 }
 
 .date {
-  color: #9aa4b2;
   font-size: 18px;
-  margin-bottom: 4px;
+  color: #9aa4b2;
+  margin-bottom: 3px;
 }
 
 .clock {
   font-size: 28px;
-  font-weight: 750;
+  font-weight: 700;
   letter-spacing: -1px;
 }
 
 .badge {
   display: inline-block;
   margin-top: 6px;
-  padding: 5px 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
   background: #2a2614;
   color: #facc15;
   font-size: 10px;
-  font-weight: 700;
-  border-radius: 20px;
+  font-weight: 600;
 }
 
 .ringWrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
-  min-height: 0;
-  padding: 10px 0;
+  margin: 8px 0;
 }
 
 .ring {
   width: min(58vw, 280px);
-  aspect-ratio: 1;
+  height: min(58vw, 280px);
   position: relative;
 }
 
@@ -114,97 +120,96 @@ body {
 .period {
   font-size: 15px;
   color: #9aa4b2;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .remain {
-  font-size: clamp(30px, 8vw, 52px);
+  font-size: 46px;
   font-weight: 800;
   letter-spacing: -2px;
-  white-space: nowrap;
 }
 
 .label {
-  margin-top: 5px;
-  color: #8b95a5;
+  margin-top: 3px;
   font-size: 11px;
+  color: #8b95a5;
 }
 
 .total {
+  flex: none;
   width: fit-content;
-  min-width: 205px;
-  margin: 0 auto 12px;
-  padding: 10px 16px;
-  border: 1px solid #263143;
+  min-width: 190px;
+  margin: -2px auto 10px;
+  padding: 8px 13px;
+  border: 1px solid #202938;
+  border-radius: 12px;
   background: #111722;
-  border-radius: 14px;
   text-align: center;
-  flex-shrink: 0;
 }
 
 .total small {
   display: block;
   color: #8b95a5;
-  font-size: 10px;
-  margin-bottom: 6px;
+  font-size: 9px;
+  margin-bottom: 2px;
 }
 
 .total strong {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .right {
-  flex-shrink: 0;
-  min-height: 0;
+  flex: none;
 }
 
 .tableTitle {
-  text-align: center;
   color: #697386;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 7px;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  text-align: center;
 }
 
 .list {
   display: grid;
-  gap: 2px;
+  gap: 0;
 }
 
 .row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: 70px 1fr auto;
+  column-gap: 8px;
   align-items: center;
-  column-gap: 10px;
-  height: 43px;
-  padding: 7px 12px;
-  background: #111722;
-  border: 1px solid #263143;
+  min-height: 45px;
+  padding: 9px 12px;
+  border: 1px solid #1d2635;
   border-radius: 12px;
+  background: #111722;
 }
 
 .row.active {
   background: #2a2614;
   border-color: #facc15;
+  box-shadow: 0 0 0 1px rgba(250,204,21,.18);
+}
+
+.time {
+  font-size: 12px;
+  color: #8b95a5;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .name {
   font-size: 14px;
   font-weight: 700;
-  white-space: nowrap;
-}
-
-.time {
-  font-size: 12px;
-  color: #929cab;
-  font-weight: 700;
-  white-space: nowrap;
 }
 
 .dur {
   font-size: 12px;
-  color: #929cab;
+  color: #8b95a5;
+  text-align: right;
   white-space: nowrap;
 }
 
@@ -213,18 +218,25 @@ body {
 }
 
 /* 가로 화면 */
+
 @media (orientation: landscape) {
   .app {
     max-width: 1100px;
+    width: 100%;
+    height: 100vh;
+    max-height: 650px;
+    position: relative;
+    top: 20px;
+    left: -25px;
     padding:
-      calc(10px + env(safe-area-inset-top))
-      calc(18px + env(safe-area-inset-right))
-      calc(10px + env(safe-area-inset-bottom))
-      calc(18px + env(safe-area-inset-left));
+      calc(14px + env(safe-area-inset-top))
+      calc(24px + env(safe-area-inset-right))
+      calc(14px + env(safe-area-inset-bottom))
+      calc(24px + env(safe-area-inset-left));
     display: grid;
-    grid-template-columns: 58% 42%;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    column-gap: 14px;
+    grid-template-columns: 65% 35%;
+    grid-template-rows: auto 1fr;
+    column-gap: 10px;
   }
 
   .top {
@@ -235,85 +247,90 @@ body {
 
   .ringWrap {
     grid-column: 1;
-    grid-row: 2;
-    padding: 0;
+    grid-row: 1 / span 2;
+    margin: 0;
+    align-self: center;
+    justify-self: center;
+    transform: translateY(-4px);
   }
 
   .ring {
-    width: min(52vh, 380px);
-    max-height: 100%;
+    width: min(62vh, 390px);
+    height: min(62vh, 390px);
   }
 
   .remain {
-    font-size: clamp(32px, 6.8vh, 60px);
+    font-size: 56px;
+  }
+
+  .period {
+    font-size: 16px;
   }
 
   .total {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
     justify-self: center;
-    margin: 5px auto 0;
+    width: auto;
     min-width: 215px;
+    margin-top: 325px;
+    position: relative;
+    z-index: 2;
   }
 
-  /* 오른쪽 시간표를 위로 올림 */
   .right {
     grid-column: 2;
-    grid-row: 1 / 4;
-    align-self: start;
-    justify-self: center;
+    grid-row: 1 / span 2;
+    align-self: center;
     width: 100%;
-    max-width: 390px;
-    padding-top: 0;
+    max-width: 260px;
     display: flex;
     flex-direction: column;
-    max-height: 100%;
-  }
-
-  .tableTitle {
-    flex-shrink: 0;
-    margin-bottom: 6px;
+    justify-content: center;
+    margin-left: auto;
   }
 
   .list {
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    gap: 2px;
+    transform: translateX(-30px);
   }
 
-  /* 원래처럼 도톰한 시간표 칸 */
+  .tableTitle {
+    transform: translateX(-30px);
+  }
+
   .row {
-    height: clamp(35px, 5.5vh, 43px);
-    min-height: clamp(35px, 5.5vh, 43px);
-    padding: 5px 10px;
-    border-radius: 10px;
-    column-gap: 8px;
-  }
-
-  .name {
-    font-size: clamp(11px, 1.85vh, 14px);
+    grid-template-columns: 82px 1fr auto;
+    column-gap: 4px;
+    min-height: 32px;
+    padding: 4px 5px 4px 8px;
+    border-radius: 8px;
   }
 
   .time, .dur {
-    font-size: clamp(9px, 1.6vh, 12px);
+    font-size: 10px;
+  }
+
+  .name {
+    font-size: 12px;
   }
 }
 
-/* 아이폰 가로 화면처럼 높이가 낮을 때 */
+/* 높이가 낮은 가로 화면 */
+
 @media (orientation: landscape) and (max-height: 430px) {
   .app {
     padding:
-      calc(6px + env(safe-area-inset-top))
-      calc(10px + env(safe-area-inset-right))
-      calc(6px + env(safe-area-inset-bottom))
-      calc(10px + env(safe-area-inset-left));
-    grid-template-columns: 57% 43%;
+      calc(8px + env(safe-area-inset-top))
+      calc(16px + env(safe-area-inset-right))
+      calc(8px + env(safe-area-inset-bottom))
+      calc(16px + env(safe-area-inset-left));
+    grid-template-columns: 65% 35%;
     column-gap: 8px;
   }
 
   .date {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .clock {
@@ -322,12 +339,13 @@ body {
 
   .badge {
     margin-top: 3px;
-    padding: 3px 7px;
+    padding: 3px 6px;
     font-size: 8px;
   }
 
   .ring {
-    width: min(48vh, 290px);
+    width: min(53vh, 290px);
+    height: min(53vh, 290px);
   }
 
   .period {
@@ -335,7 +353,7 @@ body {
   }
 
   .remain {
-    font-size: clamp(26px, 6vh, 40px);
+    font-size: 40px;
   }
 
   .label {
@@ -343,70 +361,42 @@ body {
   }
 
   .total {
-    min-width: 180px;
+    min-width: 175px;
     padding: 6px 10px;
+    margin-top: 250px;
   }
 
   .total small {
     font-size: 8px;
-    margin-bottom: 3px;
   }
 
   .total strong {
     font-size: 10px;
   }
 
-  .tableTitle {
-    font-size: 10px;
-    margin-bottom: 4px;
+  .right {
+    max-width: 220px;
   }
 
   .row {
-    height: 34px;
-    min-height: 34px;
-    padding: 3px 7px;
-    border-radius: 8px;
+    grid-template-columns: 76px 1fr auto;
+    column-gap: 3px;
+    min-height: 28px;
+    padding: 3px 4px 3px 7px;
+  }
+
+  .time, .dur {
+    font-size: 9px;
   }
 
   .name {
     font-size: 11px;
   }
 
-  .time, .dur {
-    font-size: 9px;
-  }
-}
-
-/* 세로 화면 */
-@media (orientation: portrait) {
-  body {
-    overflow: auto;
-  }
-
-  .app {
-    height: auto;
-    min-height: 100dvh;
-  }
-
-  .ringWrap {
-    flex: none;
-    padding: 18px 0;
-  }
-
-  .right {
-    padding-bottom: 20px;
-  }
-
-  .row {
-    height: 42px;
-  }
-
-  .name {
-    font-size: 12px;
-  }
-
-  .time, .dur {
+  .tableTitle {
     font-size: 10px;
+    letter-spacing: 1.3px;
+    margin-bottom: 4px;
   }
 }
 </style>
@@ -441,7 +431,9 @@ body {
 
   <div class="total">
     <small>오늘 총 공부시간</small>
-    <strong id="total">0시간 00분 / 11시간 10분</strong>
+    <strong id="total">
+      0시간 00분 / 11시간 10분
+    </strong>
   </div>
 
   <div class="right">
@@ -454,6 +446,7 @@ body {
 <script>
 const $ = id => document.getElementById(id);
 
+/* 최종 시간표 */
 const S = [
   ["Lecture 1", "08:30", "10:00"],
   ["Break", "10:00", "10:15"],
@@ -483,6 +476,18 @@ function mins(t) {
   return h * 60 + m;
 }
 
+function formatRemain(sec) {
+  sec = Math.max(0, Math.floor(sec));
+
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  const s = sec % 60;
+
+  return h > 0
+    ? `${h}:${pad(m)}:${pad(s)}`
+    : `${pad(m)}:${pad(s)}`;
+}
+
 function isRest(name) {
   return ["Break", "Lunch", "Dinner"].includes(name);
 }
@@ -493,31 +498,33 @@ const TOTAL_STUDY_MINUTES = S.reduce(
   0
 );
 
-function formatRemain(seconds) {
-  seconds = Math.max(0, Math.ceil(seconds));
-
-  const h = Math.floor(seconds / 3600);
-  const m = Math.floor((seconds % 3600) / 60);
-  const s = seconds % 60;
-
-  return h > 0
-    ? `${h}:${pad(m)}:${pad(s)}`
-    : `${pad(m)}:${pad(s)}`;
-}
-
-/* 원형 타이머 */
+/* 원형 게이지 */
 const C = 2 * Math.PI * 136;
-
 $("progress").style.strokeDasharray = C;
 $("progress").style.strokeDashoffset = C;
 
-/* 시간표: 공부 과목만 표시 */
+/* 날짜와 시계 */
+function updateDateClock() {
+  const now = new Date();
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
+
+  $("date").textContent =
+    `${now.getFullYear()}년 ${now.getMonth() + 1}월 ` +
+    `${now.getDate()}일 (${days[now.getDay()]})`;
+
+  $("clock").textContent =
+    `${pad(now.getHours())}:` +
+    `${pad(now.getMinutes())}:` +
+    `${pad(now.getSeconds())}`;
+}
+
+/* 오른쪽 시간표 - Break, Lunch, Dinner 숨김 */
 function renderSchedule(current) {
   const list = $("list");
   list.innerHTML = "";
 
   S.forEach(([name, start, end]) => {
-    if (isRest(name)) return;
+    if (["Break", "Lunch", "Dinner"].includes(name)) return;
 
     const st = mins(start);
     const en = mins(end);
@@ -539,7 +546,7 @@ function renderSchedule(current) {
   });
 }
 
-/* 순공부 시간 */
+/* 누적 공부시간 */
 function updateTotalStudy(current) {
   let studied = 0;
 
@@ -567,19 +574,11 @@ function updateTotalStudy(current) {
     `${pad(TOTAL_STUDY_MINUTES % 60)}분`;
 }
 
-/* 날짜, 현재 시간, 원형 진행률 */
+/* 원형 타이머 */
 function update() {
   const now = new Date();
-  const days = ["일", "월", "화", "수", "목", "금", "토"];
 
-  $("date").textContent =
-    `${now.getFullYear()}년 ${now.getMonth() + 1}월 ` +
-    `${now.getDate()}일 (${days[now.getDay()]})`;
-
-  $("clock").textContent =
-    `${pad(now.getHours())}:` +
-    `${pad(now.getMinutes())}:` +
-    `${pad(now.getSeconds())}`;
+  updateDateClock();
 
   const current =
     now.getHours() * 60 +
@@ -600,23 +599,28 @@ function update() {
     const en = mins(end);
 
     const progress = (current - st) / (en - st);
+    const remainSec = Math.round((en - current) * 60);
 
     $("progress").style.strokeDashoffset = C * progress;
+
     $("period").textContent =
       name === "Break" ? "쉬는 시간" : name;
-    $("remain").textContent =
-      formatRemain((en - current) * 60);
+
+    $("remain").textContent = formatRemain(remainSec);
     return;
   }
 
+  /* 첫 수업 시작 전 */
   if (current < mins(S[0][1])) {
+    const diff = (mins(S[0][1]) - current) * 60;
+
     $("period").textContent = "시작 전";
-    $("remain").textContent =
-      formatRemain((mins(S[0][1]) - current) * 60);
+    $("remain").textContent = formatRemain(diff);
     $("progress").style.strokeDashoffset = C;
     return;
   }
 
+  /* 모든 수업 종료 */
   $("period").textContent = "오늘 끝";
   $("remain").textContent = "수고했어요";
   $("progress").style.strokeDashoffset = C;
@@ -625,5 +629,6 @@ function update() {
 update();
 setInterval(update, 1000);
 </script>
+
 </body>
 </html>
